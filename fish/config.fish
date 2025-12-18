@@ -26,6 +26,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias q 'qs -c ii'
     alias cls 'clear'
     alias which-venv 'echo $VIRTUAL_ENV'
+    alias vi 'nvim'
 
 
     ########## Completions ##########
@@ -51,6 +52,12 @@ set fish_color_autosuggestion '#808080'
 
 # Set default editor as neovim
 set -x EDITOR nvim
+
+# term2alpha for nvim alpha images config (use: catimg -H 30 pfp.png | term2alpha > header.lua)
+set -x PATH $HOME/.term2alpha/bin $PATH
+
+# ghcup (GHC + Cabal)
+set -gx PATH $HOME/Downloads/term2alpha/dist-newstyle/build/x86_64-linux/ghc-9.6.7/term2alpha-1.0.0.0/x/term2alpha/build/term2alpha $PATH
 
 
 ########### Functions ###########
@@ -150,6 +157,41 @@ function list-venvs
 
     echo "Virtual environments:"
     ls $venv_dir
+end
+
+# Makes an alpha.nvim header from a .png image
+# Usage: make-alpha-header <input_image_path> <image_height> <output_file_name>
+function make-alpha-header --description 'Generate a Lua header file for alpha-nvim with configurable height'
+    # Check if exactly three arguments were provided
+    if test (count $argv) -ne 3
+        echo "Usage: make-alpha-header <input_image_path> <image_height_int> <output_file_name>"
+        echo "Example: make-alpha-header ~/my_pfp.png 45 custom_header"
+        return 1
+    end
+
+    set -l input_file $argv[1]
+    set -l image_height $argv[2] # New argument for the height
+    set -l output_name $argv[3]
+    
+    # Concatenate the variable and the literal string for the output filename
+    set -l output_file $output_name.lua 
+    
+    # Check if the input image file exists
+    if not test -f "$input_file"
+        echo "Error: Input image file '$input_file' not found."
+        return 1
+    end
+
+    # Core Logic: Execute the pipeline with the dynamic height argument
+    echo "Generating '$output_file' from '$input_file' with height $image_height..."
+    catimg -H "$image_height" "$input_file" | term2alpha > "$output_file"
+    
+    # Check the exit status of the pipeline
+    if test $status -eq 0
+        echo "Success! The alpha-nvim header file has been created at '$output_file'."
+    else
+        echo "Error: The pipeline failed (exit status: $status). Ensure 'catimg' and 'term2alpha' are installed and accessible."
+    end
 end
 
 
