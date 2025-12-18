@@ -56,9 +56,6 @@ set -x EDITOR nvim
 # term2alpha for nvim alpha images config (use: catimg -H 30 pfp.png | term2alpha > header.lua)
 set -x PATH $HOME/.term2alpha/bin $PATH
 
-# ghcup (GHC + Cabal)
-set -gx PATH $HOME/Downloads/term2alpha/dist-newstyle/build/x86_64-linux/ghc-9.6.7/term2alpha-1.0.0.0/x/term2alpha/build/term2alpha $PATH
-
 
 ########### Functions ###########
 # Dolphin open function
