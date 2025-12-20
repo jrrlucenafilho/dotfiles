@@ -191,6 +191,41 @@ function make-alpha-header --description 'Generate a Lua header file for alpha-n
     end
 end
 
+# Starts up ssh-agent for 1-time only key prompting
+function ssh-login
+  ssh-agent -c | source
+  ssh-add
+end
+
+# Stops the ssh-agent started by ssh-login
+function ssh-logout
+    if set -q SSH_AGENT_PID
+        echo "Killing ssh-agent (PID $SSH_AGENT_PID)"
+        kill $SSH_AGENT_PID
+        set -e SSH_AGENT_PID
+        set -e SSH_AUTH_SOCK
+    else
+        echo "No ssh-agent running in this session"
+    end
+end
+
+# Toggle ssh-agent on/off (start + add key, or kill it)
+function ssh-toggle
+    if set -q SSH_AGENT_PID
+        if ps -p $SSH_AGENT_PID | grep -q ssh-agent
+            echo "Stopping ssh-agent (PID $SSH_AGENT_PID)"
+            kill $SSH_AGENT_PID
+        end
+        set -e SSH_AGENT_PID
+        set -e SSH_AUTH_SOCK
+        return
+    end
+
+    echo "Starting ssh-agent"
+    ssh-agent -c | source
+    ssh-add
+end
+
 
 ########## Shell Wrappers ##########
 # Yazi shell wrapper
