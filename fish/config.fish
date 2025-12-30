@@ -46,7 +46,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     complete -c remove-venv -a "(ls ~/.virtualenvs)" --description 'Remove virtual environment'
 end
 
-########## Sets ##########
+########## Environment variables ##########
 # Set fish auto suggestion color
 set fish_color_autosuggestion '#808080'
 
@@ -55,6 +55,11 @@ set -x EDITOR nvim
 
 # term2alpha for nvim alpha images config (use: catimg -H 30 pfp.png | term2alpha > header.lua)
 set -x PATH $HOME/.term2alpha/bin $PATH
+
+# Load secrets if present
+if test -f ~/.config/fish/secrets.fish
+    source ~/.config/fish/secrets.fish
+end
 
 
 ########### Functions ###########
