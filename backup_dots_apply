@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Define source and destination directories
+BACKUP_BASE="/home/jrrlu/My Files/Misc/github-backup-repos/dotfiles"
+CONFIG_BASE="/home/jrrlu/.config"
+
+# Replace hypr/custom
+rsync -av "$BACKUP_BASE/hypr/custom/" "$CONFIG_BASE/hypr/custom/"
+
+# Replace fish
+rsync -av "$BACKUP_BASE/fish/" "$CONFIG_BASE/fish/"
+
+# Replace kitty 
+rsync -av "$BACKUP_BASE/kitty/" "$CONFIG_BASE/kitty/"
+
+echo "Dotfiles backup applied successfully."

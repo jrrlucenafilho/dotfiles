@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SRC="/home/jrrlu/.config/nvim/"
+DEST="/home/jrrlu/My Files/Misc/github-backup-repos/nvim-dotfiles/"
+
+# Create destination directory if it doesn't exist
+mkdir -p "$DEST"
+
+# Copy files and directories, preserving structure and attributes
+rsync -av --delete "$SRC" "$DEST"
+
+# Change to the destination directory (assumed to be a git repo)
+cd "$DEST" || { echo "Failed to cd to $DEST"; exit 1; }
+
+# Prompt for commit message
+read -rp "Enter commit message: " COMMIT_MSG
+
+# Add, commit, and push
+git add .
+git commit -m "$COMMIT_MSG"
+git push origin main

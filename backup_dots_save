@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Define source and destination directories
+BACKUP_BASE="/home/jrrlu/My Files/Misc/github-backup-repos/dotfiles"
+CONFIG_BASE="/home/jrrlu/.config"
+
+# Replace hypr/custom in backup
+rsync -av "$CONFIG_BASE/hypr/custom/" "$BACKUP_BASE/hypr/custom/"
+
+# Replace fish in backup
+rsync -av "$CONFIG_BASE/fish/" "$BACKUP_BASE/fish/"
+
+# Replace kitty in backup
+rsync -av "$CONFIG_BASE/kitty/" "$BACKUP_BASE/kitty/"
+
+echo "Dotfiles backup saved successfully."
+
+# Prompt for commit message
+read -p "Enter commit message: " commit_msg
+
+# Change to backup repo directory
+cd "/home/jrrlu/My Files/Misc/github-backup-repos/dotfiles" || exit 1
+
+# Add changes and commit
+git add .
+git commit -m "$commit_msg"
+
+# Push to remote repository
+git push origin main
+
+echo "Changes committed and pushed to remote."
+
