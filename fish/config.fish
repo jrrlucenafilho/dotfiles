@@ -56,6 +56,9 @@ set -x EDITOR nvim
 # term2alpha for nvim alpha images config (use: catimg -H 30 pfp.png | term2alpha > header.lua)
 set -x PATH $HOME/.term2alpha/bin $PATH
 
+# Scripts for loading and backing up dotfiles
+set -x PATH $HOME/.local/bin $PATH
+
 # Load secrets if present
 if test -f ~/.config/fish/secrets.fish
     source ~/.config/fish/secrets.fish
