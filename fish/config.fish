@@ -113,7 +113,7 @@ function activate-venv
     end
 
     echo ">>> Activating environment: $env_name"
-    source $env_path/bin/activate.fish
+    source "$env_path/bin/activate.fish"
 end
 
 # Removes selected cirtual environment
@@ -232,6 +232,17 @@ function ssh-toggle
     echo "Starting ssh-agent"
     ssh-agent -c | source
     ssh-add
+end
+
+# Gamemode functions
+function gamemode-start
+    systemctl --user start gamemoded
+    echo "Gamemode enabled."
+end
+
+function gamemode-stop
+    systemctl --user stop gamemoded
+    echo "Gamemode disabled."
 end
 
 
