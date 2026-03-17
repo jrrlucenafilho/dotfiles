@@ -245,6 +245,17 @@ function gamemode-stop
     echo "Gamemode disabled."
 end
 
+# Docker daemon functions
+function docker-daemon-start
+  systemctl start docker
+  echo "Docker daemon started."
+end
+
+function docker-daemon-stop
+  systemctl stop docker.socket
+  systemctl stop docker
+  echo "Docker daemons stopped."
+end
 
 ########## Shell Wrappers ##########
 # Yazi shell wrapper
