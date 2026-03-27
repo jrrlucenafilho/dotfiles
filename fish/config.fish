@@ -59,6 +59,9 @@ set -x PATH $HOME/.term2alpha/bin $PATH
 # Scripts for loading and backing up dotfiles
 set -x PATH $HOME/.local/bin $PATH
 
+# Gitcredentials storage
+set -x GCM_CREDENTIAL_STORE secretservice
+
 # Load secrets if present
 if test -f ~/.config/fish/secrets.fish
     source ~/.config/fish/secrets.fish
