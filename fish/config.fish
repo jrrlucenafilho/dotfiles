@@ -11,7 +11,6 @@ if status is-interactive # Commands to run in interactive sessions can go here
     # Pokeget greeting
     set fish_greeting
     pokeget random --hide-name
-    
 
     # Use starship
     starship init fish | source
@@ -24,10 +23,9 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias ls 'eza --icons'
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
     alias q 'qs -c ii'
-    alias cls 'clear'
+    alias cls clear
     alias which-venv 'echo $VIRTUAL_ENV'
-    alias vi 'nvim'
-
+    alias vi nvim
 
     ########## Completions ##########
     # Suggest existing environments (optional)
@@ -67,11 +65,11 @@ if test -f ~/.config/fish/secrets.fish
     source ~/.config/fish/secrets.fish
 end
 
-
 ########### Functions ###########
 # Dolphin open function
 function dopen
-    dolphin . &; disown
+    dolphin . &
+    disown
 end
 
 # Makes new python virtual environment
@@ -136,10 +134,10 @@ function remove-venv
     end
 
     # Safety check for 'neovim' environment
-    if test "$env_name" = "neovim"
+    if test "$env_name" = neovim
         echo -n "WARNING: You are trying to delete the 'neovim' environment. Are you sure? (y/N) "
         read -l confirm
-        if test "$confirm" != "y"
+        if test "$confirm" != y
             echo "Cancelled."
             return 1
         end
@@ -180,10 +178,10 @@ function make-alpha-header --description 'Generate a Lua header file for alpha-n
     set -l input_file $argv[1]
     set -l image_height $argv[2] # New argument for the height
     set -l output_name $argv[3]
-    
+
     # Concatenate the variable and the literal string for the output filename
-    set -l output_file $output_name.lua 
-    
+    set -l output_file $output_name.lua
+
     # Check if the input image file exists
     if not test -f "$input_file"
         echo "Error: Input image file '$input_file' not found."
@@ -192,8 +190,8 @@ function make-alpha-header --description 'Generate a Lua header file for alpha-n
 
     # Core Logic: Execute the pipeline with the dynamic height argument
     echo "Generating '$output_file' from '$input_file' with height $image_height..."
-    catimg -H "$image_height" "$input_file" | term2alpha > "$output_file"
-    
+    catimg -H "$image_height" "$input_file" | term2alpha >"$output_file"
+
     # Check the exit status of the pipeline
     if test $status -eq 0
         echo "Success! The alpha-nvim header file has been created at '$output_file'."
@@ -204,8 +202,8 @@ end
 
 # Starts up ssh-agent for 1-time only key prompting
 function ssh-login
-  ssh-agent -c | source
-  ssh-add
+    ssh-agent -c | source
+    ssh-add
 end
 
 # Stops the ssh-agent started by ssh-login
@@ -250,27 +248,26 @@ end
 
 # Docker daemon functions
 function docker-daemon-start
-  systemctl start docker
-  echo "Docker daemon started."
+    systemctl start docker
+    echo "Docker daemon started."
 end
 
 function docker-daemon-stop
-  systemctl stop docker.socket
-  systemctl stop docker
-  echo "Docker daemons stopped."
+    systemctl stop docker.socket
+    systemctl stop docker
+    echo "Docker daemons stopped."
 end
 
 ########## Shell Wrappers ##########
 # Yazi shell wrapper
 function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
 end
-
 
 ########## Shell Inits ##########
 # Zoxide init
