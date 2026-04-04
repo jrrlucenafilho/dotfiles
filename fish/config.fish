@@ -72,6 +72,19 @@ function dopen
     disown
 end
 
+# Docker compose functions
+function dcup
+    docker-compose up 2>&1 | cat $argv
+end
+
+function dcup-build
+    docker-compose up --build 2>&1 | cat $argv
+end
+
+function dcdown
+    docker-compose down 2>&1 | cat $argv
+end
+
 # Makes new python virtual environment
 # Also updates kernelspec with the new kernel
 # And installs ipykernel in the venv
