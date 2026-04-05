@@ -60,7 +60,7 @@ set -x PATH $HOME/.local/bin $PATH
 # Gitcredentials storage
 set -x GCM_CREDENTIAL_STORE secretservice
 
-# Set ssh auth socket, needed for ssh-agent with systemctl ssh-agent.service
+# Set ssh auth socket, needed for ssh-agent with systemctl ssh-agent.service (gotta touch this beforehand, as well)
 set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 
 ##### Source secrets if present #####
