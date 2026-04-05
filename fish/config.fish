@@ -60,7 +60,10 @@ set -x PATH $HOME/.local/bin $PATH
 # Gitcredentials storage
 set -x GCM_CREDENTIAL_STORE secretservice
 
-# Load secrets if present
+# Set ssh auth socket, needed for ssh-agent with systemctl ssh-agent.service
+set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
+
+##### Source secrets if present #####
 if test -f ~/.config/fish/secrets.fish
     source ~/.config/fish/secrets.fish
 end
@@ -130,7 +133,7 @@ function activate-venv
     source "$env_path/bin/activate.fish"
 end
 
-# Removes selected cirtual environment
+# Removes selected virtual environment
 function remove-venv
     set -l env_name $argv[1]
 
@@ -213,41 +216,6 @@ function make-alpha-header --description 'Generate a Lua header file for alpha-n
     end
 end
 
-# Starts up ssh-agent for 1-time only key prompting (manual)
-function ssh-login
-    ssh-agent -c | source
-    ssh-add
-end
-
-# Stops the ssh-agent started by ssh-login (manual)
-function ssh-logout
-    if set -q SSH_AGENT_PID
-        echo "Killing ssh-agent (PID $SSH_AGENT_PID)"
-        kill $SSH_AGENT_PID
-        set -e SSH_AGENT_PID
-        set -e SSH_AUTH_SOCK
-    else
-        echo "No ssh-agent running in this session"
-    end
-end
-
-# Toggle ssh-agent on/off (start + add key, or kill it) (manual)
-function ssh-toggle
-    if set -q SSH_AGENT_PID
-        if ps -p $SSH_AGENT_PID | grep -q ssh-agent
-            echo "Stopping ssh-agent (PID $SSH_AGENT_PID)"
-            kill $SSH_AGENT_PID
-        end
-        set -e SSH_AGENT_PID
-        set -e SSH_AUTH_SOCK
-        return
-    end
-
-    echo "Starting ssh-agent"
-    ssh-agent -c | source
-    ssh-add
-end
-
 # Gamemode functions
 function gamemode-start
     systemctl --user start gamemoded
@@ -285,23 +253,3 @@ end
 ########## Shell Inits ##########
 # Zoxide init
 zoxide init fish | source
-
-# Ssh agent stuff
-# Check if keychain is installed before trying to use it
-if type -q keychain
-    # Temporarily set SHELL to fish so keychain outputs Fish-compatible commands.
-    # The 'begin...end' block creates a local scope for the SHELL variable.
-    begin
-        set -lx SHELL (which fish) # Set SHELL to the path of your fish executable (make keychain see i'm on fish shell)
-        # Run keychain and source its output.
-        # Remove the deprecated --agents flag.
-        # Replace 'id_ed25519' with the actual filename of your private key.
-        keychain --eval --quiet $SSH_KEY_FILENAME | source
-    end
-end
-
-# If more keys are needed:
-# begin
-#     set -lx SHELL (which fish)
-#     keychain --eval --quiet id_rsa | source
-# end
