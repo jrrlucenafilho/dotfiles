@@ -26,6 +26,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias cls clear
     alias which-venv 'echo $VIRTUAL_ENV'
     alias vi nvim
+    alias oc opencode
 
     ########## Completions ##########
     # Suggest existing environments (optional)
