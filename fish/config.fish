@@ -58,6 +58,16 @@ set -x PATH $HOME/.term2alpha/bin $PATH
 # Scripts for loading and backing up dotfiles
 set -x PATH $HOME/.local/bin $PATH
 
+# Add LLAMA.CPP binaries
+set -x PATH $HOME/llama.cpp/build/bin $PATH
+
+# Append BLENDER_HOST and BLENDER_PORT for blender mcp
+set -x BLENDER_HOST 'host.docker.internal'
+set -x BLENDER_PORT 9876
+
+# Append libopenvino to LD_LIBRARY_PATH for blender buddy
+set -x LD_LIBRARY_PATH $HOME/.virtualenvs/openvino/lib/python3.12/site-packages/openvino/libs $LD_LIBRARY_PATH
+
 # Gitcredentials storage
 set -x GCM_CREDENTIAL_STORE secretservice
 
