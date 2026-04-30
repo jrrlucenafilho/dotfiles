@@ -27,6 +27,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias which-venv 'echo $VIRTUAL_ENV'
     alias vi nvim
     alias oc opencode
+    alias llama.cpp-cuda-build 'cmake -B build -DGGML_CUDA=ON && cmake --build build --config Release'
 
     ########## Completions ##########
     # Suggest existing environments (optional)
