@@ -251,6 +251,17 @@ function docker-daemon-stop
     echo "Docker daemons stopped."
 end
 
+# Llama CLI run model
+function llama-cli-run
+    if test (count $argv) -ne 1
+        echo "Usage: llama-fit <model_name>"
+        return 1
+    end
+
+    set model_name $argv[1]
+    llama-cli -m "$model_name" --fit on
+end
+
 ########## Shell Wrappers ##########
 # Yazi shell wrapper
 function y
