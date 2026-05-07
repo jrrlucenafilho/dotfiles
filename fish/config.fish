@@ -262,6 +262,25 @@ function llama-cli-run
     llama-cli -m "$model_name" --fit on
 end
 
+# Llama server run model
+function llama-server-run --description "Run llama-server with model autocomplete"
+    if test -z "$argv[1]"
+        echo "Usage: llama-server <model-name>"
+        return 1
+    end
+
+    set model ~/models/$argv[1]
+    if not test -f $model
+        echo "Error: Model file not found: $model"
+        return 1
+    end
+
+    command llama-server -m $model --ctx-size 131072 -ctk q8_0 -ctv q8_0 --fit on -fa on
+end
+
+complete -c llama-server-run -f
+complete -c llama-server-run -a '(ls ~/models/)' -d "Model file"
+
 ########## Shell Wrappers ##########
 # Yazi shell wrapper
 function y
