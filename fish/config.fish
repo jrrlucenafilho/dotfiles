@@ -258,8 +258,8 @@ function llama-cli-run
         return 1
     end
 
-    set model_name $argv[1]
-    llama-cli -m "$model_name" --fit on
+    set model $argv[1]
+    llama-cli -m $model --ctx-size 131072 -ctk q8_0 -ctv q8_0 --fit on -fa on
 end
 
 # Llama server run model
@@ -275,7 +275,7 @@ function llama-server-run --description "Run llama-server with model autocomplet
         return 1
     end
 
-    command llama-server -m $model --ctx-size 131072 -ctk q8_0 -ctv q8_0 --fit on -fa on
+    command llama-server -m $model --ctx-size 131072 -ctk q8_0 -ctv q8_0 --fit on -fa on --port 8081
 end
 
 complete -c llama-server-run -f
