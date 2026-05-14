@@ -15,14 +15,13 @@ STD_POS="0, 0"
 # --- Step 1: Detect current mode ---
 if hyprctl getoption input:tablet:active_area_size | grep -q "\[39, 61]"; then
   echo "Osu! mode detected. Switching to Standard mode..."
-  hyprctl keyword "input:tablet:active_area_size" "$STD_SIZE"
-  hyprctl keyword "input:tablet:active_area_position" "$STD_POS"
+  hyprctl eval 'hl.config({ input = { tablet = { active_area_size = { '"$STD_SIZE"' }, active_area_position = { '"$STD_POS"' } } } })'
   MODE_NAME="Standard"
   FINAL_SIZE=$STD_SIZE
   FINAL_POS=$STD_POS
 else
   echo "Standard mode detected. Switching to Osu! mode..."
-  hyprctl --batch "keyword input:tablet:active_area_size $OSU_SIZE; keyword input:tablet:active_area_position $OSU_POS"
+  hyprctl eval 'hl.config({ input = { tablet = { active_area_size = { '"$OSU_SIZE"' }, active_area_position = { '"$OSU_POS"' } } } })'
   MODE_NAME="Osu!"
   FINAL_SIZE=$OSU_SIZE
   FINAL_POS=$OSU_POS
