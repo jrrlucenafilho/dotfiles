@@ -16,10 +16,10 @@ rsync -av "$CONFIG_BASE/kitty/" "$BACKUP_BASE/kitty/"
 echo "Dotfiles backup saved successfully."
 
 # Prompt for commit message
-read -p "Enter commit message: " commit_msg
+read -rp "Enter commit message: " commit_msg
 
 # Change to backup repo directory
-cd "/home/jrrlu/My Files/Misc/github-backup-repos/dotfiles" || exit 1
+cd "$BACKUP_BASE" || exit 1
 
 # Add changes and commit
 git add .
