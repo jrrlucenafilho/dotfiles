@@ -18,15 +18,6 @@ hl.monitor({
     scale = "1"
 })
 
--- Wildcard for mirroring on other monitors
-hl.monitor({
-    output = "",
-    mode = "preferred",
-    position = "auto",
-    scale = "1",
-    mirror = "eDP-1"
-})
-
 ----- [[ Misc configs ]] -----
 -- Keyboard layout
 hl.config({
