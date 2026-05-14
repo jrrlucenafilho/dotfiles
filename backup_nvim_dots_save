@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SRC="/home/jrrlu/.config/nvim/"
-DEST="/home/jrrlu/My Files/Misc/github-backup-repos/nvim-dotfiles/"
+DEST="/home/jrrlu/My Files/Misc/backups/github-backup-repos/nvim-dotfiles/"
 
 # Create destination directory if it doesn't exist
 mkdir -p "$DEST"
