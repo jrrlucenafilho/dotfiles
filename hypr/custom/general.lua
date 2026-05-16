@@ -13,8 +13,8 @@ hl.monitor({
 -- Secondary HDMI monitor
 hl.monitor({
     output = "HDMI-A-1",
-    mode = "preferred@74.97",
-    position = "-1920x0",
+    mode = "1920x1080@100.00Hz",
+    position = "-1920x0@100.00Hz",
     scale = "1"
 })
 
