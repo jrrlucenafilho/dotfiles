@@ -24,26 +24,27 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
     alias q 'qs -c ii'
     alias cls clear
-    alias which-venv 'echo $VIRTUAL_ENV'
+    alias venv-which 'echo $VIRTUAL_ENV'
     alias vi nvim
     alias oc opencode
     alias llama.cpp-cuda-build 'cmake -B build -DGGML_CUDA=ON && cmake --build build --config Release'
+    alias show-wifi-password 'nmcli device wifi show-password'
 
     ########## Completions ##########
     # Suggest existing environments (optional)
     complete \
-        --command new-env \
+        --command venv-new \
         --arguments '(ls ~/.virtualenvs)' \
         --description 'Name for new environment'
 
     # Complete env names from ~/.virtualenvs
     complete \
-        --command activate-venv \
+        --command venv-activate \
         --arguments '(ls ~/.virtualenvs)' \
         --description 'Virtual environment name'
 
     # Completion for remove-venv: list directories in ~/.virtualenvs
-    complete -c remove-venv -a "(ls ~/.virtualenvs)" --description 'Remove virtual environment'
+    complete -c venv-remove -a "(ls ~/.virtualenvs)" --description 'Remove virtual environment'
 end
 
 ########## Environment variables ##########
@@ -103,9 +104,9 @@ end
 # Makes new python virtual environment
 # Also updates kernelspec with the new kernel
 # And installs ipykernel in the venv
-function new-venv
+function venv-new
     if test (count $argv) -ne 1
-        echo "Usage: new-env <env_name>"
+        echo "Usage: venv-new <env_name>"
         return 1
     end
 
@@ -127,9 +128,9 @@ function new-venv
 end
 
 # Activate python virtual environment
-function activate-venv
+function venv-activate 
     if test (count $argv) -ne 1
-        echo "Usage: activate-venv <env_name>"
+        echo "Usage: venv-activate <env_name>"
         return 1
     end
 
@@ -146,11 +147,11 @@ function activate-venv
 end
 
 # Removes selected virtual environment
-function remove-venv
+function venv-remove
     set -l env_name $argv[1]
 
     if test -z "$env_name"
-        echo "Usage: remove-venv <env_name>"
+        echo "Usage: venv-remove <env_name>"
         return 1
     end
 
@@ -181,7 +182,7 @@ function remove-venv
 end
 
 # Lists existing virtual environments
-function list-venvs
+function venv-list
     set -l venv_dir ~/.virtualenvs
 
     if not test -d $venv_dir
