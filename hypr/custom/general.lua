@@ -32,17 +32,9 @@ hl.config({
 	general = {
 		allow_tearing = true,
 	},
-})
 
-hl.config({
-	misc = {
-		vrr = 2,
-	},
-})
-
--- Overwrite original config's blur
-hl.config({
 	decoration = {
+		-- Overwrite original ii's blur config
 		blur = {
 			enabled = true,
 			xray = true,
@@ -60,5 +52,9 @@ hl.config({
 			input_methods = true,
 			input_methods_ignorealpha = 0.8,
 		},
+	},
+
+	misc = {
+		vrr = 2,
 	},
 })
