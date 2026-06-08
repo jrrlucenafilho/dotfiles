@@ -285,13 +285,13 @@ complete -c llama-server-run -a '(ls ~/models/)' -d "Model file"
 # Build and run OpenGL C program
 function glrun
     if test (count $argv) -ne 1
-        echo "Usage: glrun <name>"
-        echo "  Compiles <name>.c with OpenGL and runs the binary"
+        echo "Usage: glrun <filename>"
+        echo "  Compiles <filename.c> with OpenGL and runs the binary"
         return 1
     end
 
-    set name $argv[1]
-    g++ $name.c -o $name -lGL -lGLU -lglut && ./$name
+    set filename $argv[1]
+    g++ $filename -o $filename -lGL -lGLU -lglut && ./$filename
 end
 
 # Download audio from a video URL as mp3
