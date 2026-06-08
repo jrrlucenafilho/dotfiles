@@ -128,7 +128,7 @@ function venv-new
 end
 
 # Activate python virtual environment
-function venv-activate 
+function venv-activate
     if test (count $argv) -ne 1
         echo "Usage: venv-activate <env_name>"
         return 1
@@ -281,6 +281,27 @@ end
 
 complete -c llama-server-run -f
 complete -c llama-server-run -a '(ls ~/models/)' -d "Model file"
+
+# Build and run OpenGL C program
+function glrun
+    if test (count $argv) -ne 1
+        echo "Usage: glrun <name>"
+        echo "  Compiles <name>.c with OpenGL and runs the binary"
+        return 1
+    end
+
+    set name $argv[1]
+    g++ $name.c -o $name -lGL -lGLU -lglut && ./$name
+end
+
+# Download audio from a video URL as mp3
+function yt-dlp-audio
+    if test (count $argv) -ne 1
+        echo "Usage: yt-dlp-audio <video_url>"
+        return 1
+    end
+    yt-dlp -x --audio-format mp3 $argv[1]
+end
 
 ########## Shell Wrappers ##########
 # Yazi shell wrapper
