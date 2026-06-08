@@ -291,7 +291,8 @@ function glrun
     end
 
     set filename $argv[1]
-    g++ $filename -o $filename -lGL -lGLU -lglut && ./$filename
+    set output (string replace -r '\.c$' '' $filename)
+    g++ $filename -o $output -lGL -lGLU -lglut && ./$output
 end
 
 # Download audio from a video URL as mp3
