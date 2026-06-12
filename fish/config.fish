@@ -305,6 +305,11 @@ function yt-dlp-audio
     yt-dlp -x --audio-format mp3 $argv[1]
 end
 
+# Spotx-bash
+function spotx
+  curl -sSL https://spotx-official.github.io/run.sh | bash
+end
+
 ########## Shell Wrappers ##########
 # Yazi shell wrapper
 function y
