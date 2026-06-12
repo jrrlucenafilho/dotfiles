@@ -29,7 +29,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias oc opencode
     alias llama.cpp-cuda-build 'cmake -B build -DGGML_CUDA=ON && cmake --build build --config Release'
     alias wifi-password 'nmcli device wifi show-password'
-    alias update 'sudo pacman -Syu'
+    alias update 'sudo pacman -Syu && yay'
 
     ########## Completions ##########
     # Suggest existing environments (optional)
