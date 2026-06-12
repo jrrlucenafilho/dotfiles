@@ -300,7 +300,18 @@ end
 
 # Spotx-bash
 function spotx
-  curl -sSL https://spotx-official.github.io/run.sh | bash
+    curl -sSL https://spotx-official.github.io/run.sh | bash
+end
+
+# Clean pacman cache and partial downloads
+function cleanup
+    set -l downloads_pkg_cache /var/cache/pacman/pkg/download-*
+    if test -n "$downloads_pkg_cache"
+        sudo rm -r $downloads_pkg_cache
+        echo "Cleared old pkg cache"
+    end
+    sudo pacman -Sc
+    yay -Sc
 end
 
 ########## Shell Wrappers ##########
