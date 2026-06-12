@@ -308,7 +308,9 @@ function cleanup
     set -l downloads_pkg_cache /var/cache/pacman/pkg/download-*
     if test -n "$downloads_pkg_cache"
         sudo rm -r $downloads_pkg_cache
-        echo "Cleared old pkg cache"
+        echo "Cleared old 'download-*' pkg cache"
+    else
+        echo "No old 'download-*' pkg cache found"
     end
     sudo pacman -Sc
     yay -Sc
