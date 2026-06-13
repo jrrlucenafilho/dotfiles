@@ -310,7 +310,14 @@ function cleanup
         sudo rm -r $downloads_pkg_cache
         echo "Cleared old 'download-*' pkg cache"
     else
-        echo "No old 'download-*' pkg cache found"
+        echo "No old 'download-*' pkg cache files found to clean up"
+    end
+    set -l orphans (pacman -Qdtq 2>/dev/null)
+    if test -n "$orphans"
+        sudo pacman -Rns $orphans
+        echo "Cleared orphaned packages"
+    else
+        echo "No orphaned packages found to clean up"
     end
     sudo pacman -Sc
     yay -Sc
