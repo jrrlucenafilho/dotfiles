@@ -113,6 +113,9 @@ function venv-new
     echo ">>> Installing ipykernel inside $env_name"
     uv pip install -q --python $env_path/bin/python ipykernel
 
+    echo ">>> Installing nbformat inside $env_name"
+    uv pip install -q --python $env_path/bin/python nbformat
+
     echo ">>> Registering Jupyter kernel: $env_name"
     $env_path/bin/python -m ipykernel install --user --name $env_name --display-name "Python ($env_name)"
 
