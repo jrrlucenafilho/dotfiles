@@ -25,3 +25,6 @@ hl.bind(
 
 -- Open vscode
 hl.bind("SUPER+ALT+C", hl.dsp.exec_cmd("code"), { description = "Open VScode" })
+
+-- end4-pC fork settings
+hl.bind("SUPER + escape", hl.dsp.global("quickshell:settingsToggle"), {description = "Toggle settings"})
