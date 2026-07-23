@@ -292,6 +292,19 @@ function glrun
     g++ $filename -o $output -lGL -lGLU -lglut && ./$output
 end
 
+# Build and run OpenGL C program (with gcc instead of g++)
+function glrun-gcc
+    if test (count $argv) -ne 1
+        echo "Usage: glrun-gcc <filename>"
+        echo "  Compiles <filename.c> with OpenGL and runs the binary"
+        return 1
+    end
+
+    set filename $argv[1]
+    set output (string replace -r '\.c$' '' $filename)
+    gcc $filename -o $output -lGL -lGLU -lglut && ./$output
+end
+
 # Download audio from a video URL as mp3
 function yt-dlp-audio
     if test (count $argv) -ne 1
