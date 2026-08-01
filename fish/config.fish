@@ -53,22 +53,22 @@ end
 set fish_color_autosuggestion '#808080'
 
 # Set default editor as neovim
-set -x EDITOR nvim
+set -gx EDITOR nvim
 
 # term2alpha for nvim alpha images config (use: catimg -H 30 pfp.png | term2alpha > header.lua)
-set -x PATH $HOME/.term2alpha/bin $PATH
+set -gx PATH $HOME/.term2alpha/bin $PATH
 
 # Scripts for loading and backing up dotfiles
-set -x PATH $HOME/.local/bin $PATH
+set -gx PATH $HOME/.local/bin $PATH
 
 # Add LLAMA.CPP binaries
-set -x PATH $HOME/llama.cpp/build/bin $PATH
+set -gx PATH $HOME/llama.cpp/build/bin $PATH
 
 # Gitcredentials storage
-set -x GCM_CREDENTIAL_STORE secretservice
+set -gx GCM_CREDENTIAL_STORE secretservice
 
 # Set ssh auth socket, needed for ssh-agent with systemctl ssh-agent.service (gotta touch this beforehand, as well)
-set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
+set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 
 ##### Source secrets if present #####
 if test -f ~/.config/fish/secrets.fish
