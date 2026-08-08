@@ -315,8 +315,9 @@ function yt-dlp-audio
 end
 
 # Spotx-bash
-function spotx
-    curl -sSL https://spotx-official.github.io/run.sh | bash
+function spotx-apply
+    sudo bash spotx.sh -P ~/.local/share/spotify-launcher/install/usr/share/spotify -- Works for now
+    # curl -sSL https://spotx-official.github.io/run.sh | bash -- Previous
 end
 
 # Clean pacman cache and partial downloads
