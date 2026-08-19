@@ -316,7 +316,7 @@ end
 
 # Spotx-bash
 function spotx-apply
-    sudo bash spotx.sh -P ~/.local/share/spotify-launcher/install/usr/share/spotify -- Works for now
+    curl -sSL https://raw.githubusercontent.com/SpotX-Official/SpotX-Bash/main/spotx.sh | sudo bash -s -- -P ~/.local/share/spotify-launcher/install/usr/share/spotify -- Works for now
     # curl -sSL https://spotx-official.github.io/run.sh | bash -- Previous
 end
 
