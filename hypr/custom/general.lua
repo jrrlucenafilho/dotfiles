@@ -11,12 +11,12 @@ hl.monitor({
 })
 
 -- Secondary HDMI monitor
--- hl.monitor({
--- 	output = "HDMI-A-1",
--- 	mode = "1920x1080@100.00Hz",
--- 	position = "-1920x0@100.00Hz",
--- 	scale = "1",
--- })
+hl.monitor({
+	output = "HDMI-A-1",
+	mode = "1920x1080@100.00Hz",
+	position = "-1920x0@100.00Hz",
+	scale = "1",
+})
 
 ----- [[ Misc configs ]] -----
 -- Keyboard layout

@@ -95,6 +95,11 @@ function dcdown
     docker-compose down 2>&1 | cat $argv
 end
 
+# Reload quickshell
+function quickshell-reload
+    killall qs 2>/dev/null; qs -c end4-pC > /dev/null 2>&1 & disown
+end
+
 # Makes new python virtual environment
 # Also updates kernelspec with the new kernel
 # And installs ipykernel in the venv
