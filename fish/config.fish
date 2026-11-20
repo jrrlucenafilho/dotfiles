@@ -346,6 +346,21 @@ function cleanup
 end
 
 ########## Shell Wrappers ##########
+# OpenCode wrapper: remove kitty margins/padding for this window only while it runs
+function opencode --description 'Run opencode with kitty margins/padding removed' --wraps opencode
+    if not set -q KITTY_WINDOW_ID
+        command opencode $argv
+        return
+    end
+
+    set -l spacing kitten @ set-spacing --match id:$KITTY_WINDOW_ID
+    $spacing margin=0 padding=0 2>/dev/null
+    command opencode $argv
+    set -l ret $status
+    $spacing margin=default padding=default 2>/dev/null
+    return $ret
+end
+
 # Yazi shell wrapper
 function y
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
