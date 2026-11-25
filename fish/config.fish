@@ -374,3 +374,7 @@ end
 ########## Shell Inits ##########
 # Zoxide init
 zoxide init fish | source
+
+########## Alliance 5.0 (VLSI) ##########
+# Ambiente do projeto de Microeletronica (UFPB). Remove estas 2 linhas para desativar.
+source "/home/jrrlu/My Files/UFPB/P11 - 2026.2/Introdução à Microeletrônica/Projeto Final/alliance/env.fish"
